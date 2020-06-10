@@ -1,0 +1,2 @@
+module Manager::OrderDetailsHelper
+end
