@@ -4,12 +4,61 @@
     <title>my_new_device...</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/61abcfe439.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <!-- ヘッダーの記述 -->
+    <header class="navbar">
+      <div class="container">
+        <nav><%= link_to root_path do %>
+          <%= image_tag "logo1.png" %>
+          <% end %>
+        </nav>
+        <nav>
+          <% if public_member_signed_in? %>
+            <ul class="nav">
+              <li class="nav-item"><P>ようこそ、<%= current_member.name %>さん!</P><li>
+              <li class="nav-item"><%= link_to "このサイトについて", public_about_path, class: "btn btn-dark" %></li>
+              <li class="nav-item"><%= link_to "マイページ", public_member_path(current_member.id), class: "btn btn-dark"%></li>
+              <li class="nav-item"><%= link_to "商品一覧", public_items_path, class: "btn btn-btn-dark"%></li>
+              <li class="nav-item"><%= link_to "カート", public_cart_items_path, class: "btn btn-btn-dark"%></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_public_member_session_path, method: :delete, class: "btn btn-dark"%></li>
+            </ul>
+          <% elsif manager_admin_signed_in? %>
+            <ul class="nav">
+              <li class="nav-item"><%= link_to "商品一覧", manager_items_path %></li>
+              <li class="nav-item"><%= link_to "会員一覧", manager_members_path, class: "btn btn-dark" %></li>
+              <li class="nav-item"><%= link_to "注文履歴一覧", manager_orders_path, class: "btn btn-dark" %></li>
+              <li class="nav-item"><%= link_to "カテゴリ一覧", manager_genres_path, class: "btn btn-dark" %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_manager_admin_session_path, method: :delete, class: "btn btn-dark"%></li>
+            </ul>
+          <% else %>
+            <ul class="nav">
+              <li class="nav-item"><%= link_to "このサイトについて", public_about_path, class: "btn btn-dark" %></li>
+              <li class="nav-item"><%= link_to "新規登録", new_public_member_registration_path, class: "btn btn-dark" %></li>
+              <li class="nav-item"><%= link_to "ログイン", new_public_member_session_path, class: "btn btn-dark" %></li>
+            </ul>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+      <div class="container">
+        <div class="flash_message">
+          <%= flash_message(flash[:success], :success) if flash[:success] %>
+          <%= flash_message(flash[:error], :danger) if flash[:error] %>
+          <%= flash_message(flash[:alert], :warning) if flash[:alert] %>
+          <%= flash_message(flash[:notice], :info) if flash[:notice] %>
+        </div>
+        <%= yield %>
+      </div>
+      <!-- フッターの記述 -->
+    <footer class="fixed-bottom">
+      <div class="row footer justify-content-center">
+        <p>CopyRight Odayutaka</p>
+      </div>
+    </footer>
   </body>
 </html>
