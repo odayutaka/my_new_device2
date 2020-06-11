@@ -35,6 +35,7 @@ class DeviseCreateMembers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :kana_name
       t.boolean :status, default: true
+      t.string :member_image_id
       t.timestamps null: false
     end
 

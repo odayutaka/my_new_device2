@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 		def after_sign_in_path_for(resource)
     	case resource
    		when Admin
-      	admin_top_path
+      	manager_top_path
     	when Member
       	root_path
     	end
@@ -16,14 +16,17 @@ class ApplicationController < ActionController::Base
 
   	def after_sign_out_path_for(resource)
     	case resource
-    	when :admin
-      	new_admin_session_path
-    	when :member
+    	when :manager_admin
+      	new_manager_admin_session_path
+    	when :public_member
       	root_path
     	end
   	end
 
 	def configure_permitted_parameters
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :is_valid])
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :kana_name, :email, :is_valid])
+    devise_parameter_sanitizer.permit(:sign_in, keys:[:email])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :kana_name, :email, :is_valid])
+    # デバイスに追加したカラムを許可する記述
 	end
 end

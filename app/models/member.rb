@@ -9,6 +9,8 @@ class Member < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :items, through: :cart_items
 
+  attachment :member_image
+
   validates :name, presence: true
   validates :kana_name, presence: true
 

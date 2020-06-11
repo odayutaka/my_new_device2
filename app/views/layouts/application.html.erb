@@ -20,16 +20,16 @@
         <nav>
           <% if public_member_signed_in? %>
             <ul class="nav">
-              <li class="nav-item"><P>ようこそ、<%= current_member.name %>さん!</P><li>
               <li class="nav-item"><%= link_to "このサイトについて", public_about_path, class: "btn btn-dark" %></li>
-              <li class="nav-item"><%= link_to "マイページ", public_member_path(current_member.id), class: "btn btn-dark"%></li>
-              <li class="nav-item"><%= link_to "商品一覧", public_items_path, class: "btn btn-btn-dark"%></li>
-              <li class="nav-item"><%= link_to "カート", public_cart_items_path, class: "btn btn-btn-dark"%></li>
+              <li class="nav-item"><%= link_to "マイページ", public_member_path(current_public_member.id), class: "btn btn-dark"%></li>
+              <li class="nav-item"><%= link_to "商品一覧", public_items_path, class: "btn btn-dark"%></li>
+              <li class="nav-item"><%= link_to "カート", public_cart_items_path, class: "btn btn-dark"%></li>
               <li class="nav-item"><%= link_to "ログアウト", destroy_public_member_session_path, method: :delete, class: "btn btn-dark"%></li>
+              <div><P>ようこそ、<%= current_public_member.name %>さん!</P><div>
             </ul>
           <% elsif manager_admin_signed_in? %>
             <ul class="nav">
-              <li class="nav-item"><%= link_to "商品一覧", manager_items_path %></li>
+              <li class="nav-item"><%= link_to "商品一覧", manager_items_path, class: "btn btn-dark" %></li>
               <li class="nav-item"><%= link_to "会員一覧", manager_members_path, class: "btn btn-dark" %></li>
               <li class="nav-item"><%= link_to "注文履歴一覧", manager_orders_path, class: "btn btn-dark" %></li>
               <li class="nav-item"><%= link_to "カテゴリ一覧", manager_genres_path, class: "btn btn-dark" %></li>
