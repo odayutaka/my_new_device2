@@ -1,35 +1,64 @@
 <h3>マイページメニュー</h3>
 
-<div class="row mt-4">
+<div class="row m-5">
   <div class="col-md-6">
-    <div class="card card-body">
-      <h5 class="card-title">注文履歴</h5>
-      <p class="card-text">配送状況の確認</p>
-      <a href="#" class="btn btn-success">ボタン</a>
+    <div class="card bg-light py-5">
+      <div class="row no-gutters">
+        <div class= "col-lg-6">
+          <i class="fas fa-box fa-4x col text-center"></i>
+        </div>
+        <div class= "col-lg-6">
+          <h5 class="card-title">注文履歴</h5>
+          <p class="card-text">配送状況の確認</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card card-body">
-      <h5 class="card-title">ログインとセキュリティ</h5>
-      <p class="card-text">アカウント情報の変更</p>
-      <a href="#" class="btn btn-success">ボタン</a>
+    <%= link_to edit_public_member_path do %>
+    <div class="card bg-light py-5">
+      <div class="row no-gutters">
+        <div class= "col-lg-6">
+          <i class="fas fa-user-lock fa-4x col text-center"></i>
+        </div>
+        <div class= "col-lg-6">
+          <h5 class="card-title">ログインとセキュリティ</h5>
+          <p class="card-text">アカウント情報の変更</p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row m-5">
+  <div class="col-md-6">
+    <%= link_to public_addresses_path do %>
+    <div class="card bg-light py-5">
+      <div class="row no-gutters">
+        <div class= "col-lg-6">
+          <i class="fas fa-map-marker-alt fa-4x col text-center"></i>
+        </div>
+        <div class= "col-lg-6">
+          <h5 class="card-title">アドレス帳</h5>
+          <p class="card-text">お届け先住所の確認と変更</p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <div class="card bg-light py-5">
+      <div class="row no-gutters">
+        <div class= "col-lg-6">
+          <i class="far fa-credit-card fa-4x col text-center"></i>
+        </div>
+        <div class= "col-lg-6">
+          <h5 class="card-title">お客様の支払い</h5>
+          <p class="card-text">クレジットカードの登録、変更</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <div class="card card-body">
-      <h5 class="card-title">アドレス帳</h5>
-      <p class="card-text">お届け先住所の確認と変更。</p>
-      <a href="#" class="btn btn-success">ボタン</a>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card card-body">
-      <h5 class="card-title">お客様の支払い</h5>
-      <p class="card-text">クレジットカード情報の登録、変更</p>
-      <a href="#" class="btn btn-success">ボタン</a>
-    </div>
-  </div>
-</div>

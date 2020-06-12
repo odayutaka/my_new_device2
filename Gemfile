@@ -79,4 +79,8 @@ gem 'ratyrate'
 gem 'rename'
 # 決済機能用gem
 gem 'payjp'
+# devise日本語化用gem
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
 

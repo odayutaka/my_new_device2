@@ -17,7 +17,7 @@ class Public::MembersController < ApplicationController
   def update
     @member = current_public_member
     if @member.update(member_params)
-      redirect_to public_member_path(current_public_member.id), success: "ユーザー情報の編集に成功しました"
+      redirect_to public_member_path(current_public_member.id), notice: "ユーザー情報の編集に成功しました"
     else
     render 'edit'
     end
