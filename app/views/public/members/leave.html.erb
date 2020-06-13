@@ -1,14 +1,17 @@
-<h3>退会手続き</h3>
-
-<p>退会すると、会員登録情報や</p>
-<p>これまでの購入履歴が閲覧できなくなります。</p>
-<p>退会する場合、「退会する」をクリックしてください。</p>
-
-<%= link_to "退会しない", public_member_path(current_public_member.id), class: " btn btn-primary" %>
-
-<!-- 会員ステータス(status)をfalseに変更 -->
-<%= form_with model: @member,url: {controller: 'public/members', action: 'update_status' },lacal: true do |f| %>
-	<%= f.hidden_field :status, value: "false" %>
-<%= f.submit "退会する", class: "btn btn-danger" %>
-<% end %>
+<div class="row m-5">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <h5 class="card-header text-center">退会手続き</h5>
+      <div class="card-body">
+        <p>退会すると、会員登録情報や</br>これまでの購入履歴が閲覧できなくなります。<br>退会する場合、「退会する」をクリックしてください。</p>
+        <div class="form-group">
+          <%= form_with model: @member,url: {controller: 'public/members', action: 'update_status' },lacal: true do |f| %>
+          <%= f.hidden_field :status, value: "false" %>
+          <%= f.submit "退会する", data: {confirm: "本当に退会しますか？"}, class: "btn btn-danger col-md-12" %>
+          <% end %>
+        </div>
+        <%= link_to "退会せずマイページに戻る", public_member_path(current_public_member.id), class: "btn btn-info col-md-12" %>
+      </div>
+    </div>
+  </div>
 </div>

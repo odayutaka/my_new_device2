@@ -25,7 +25,7 @@
               <li class="nav-item"><%= link_to "商品一覧", public_items_path, class: "btn btn-dark"%></li>
               <li class="nav-item"><%= link_to "カート", public_cart_items_path, class: "btn btn-dark"%></li>
               <li class="nav-item"><%= link_to "ログアウト", destroy_public_member_session_path, method: :delete, class: "btn btn-dark"%></li>
-              <div><P>ようこそ、<%= current_public_member.name %>さん!</P><div>
+              <!-- <div><P>ようこそ、<%= current_public_member.name %>さん!</P><div> -->
             </ul>
           <% elsif manager_admin_signed_in? %>
             <ul class="nav">
