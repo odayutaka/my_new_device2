@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_124601) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
-    t.string "genre_image_id", null: false
+    t.string "genre_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_genres_on_id"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_124601) do
     t.string "name", null: false
     t.integer "price", null: false
     t.text "introduction", null: false
-    t.string "item_image_id", null: false
+    t.string "item_image_id"
     t.boolean "status", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

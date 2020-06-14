@@ -1,0 +1,29 @@
+<div class="row mt-5">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <h5 class="card-header text-center">カテゴリーの編集</h5>
+      <div class="card-body">
+        <%= form_with model:[:manager, @genre],local: true do |f| %>
+          <% if @genre.errors %>
+            <ul>
+            <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+            </ul>
+          <% end %>
+          <div class="form-group">
+            <%= f.label :カテゴリー名 %></br>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-md-12" %>
+          </div>
+          <div class="form-group">
+            <%= f.attachment_field :genre_image %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "変更を保存する", class: "btn btn-primary col-md-12" %>
+          </div>
+        <% end %>
+        <%= link_to "変更せずカテゴリ一覧に戻る", manager_genres_path, class: "btn btn-info col-md-12 mb-2" %>
+      </div>
+    </div>
+  </div>
+</div>
