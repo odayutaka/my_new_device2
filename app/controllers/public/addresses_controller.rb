@@ -1,5 +1,5 @@
 class Public::AddressesController < ApplicationController
-
+  before_action :authenticate_public_member!
   def new
     @address = Address.new
   end
