@@ -4,12 +4,12 @@
       <h5 class="card-header text-center">住所を変更する</h5>
       <div class="card-body">
         <%= form_with model:[:public, @address],locai: true do |f| %>
-          <% if @address.errors.any? %>
-            <ul>
+          <% if @address.errors %>
+          <ul>
             <% @address.errors.full_messages.each do |message| %>
             <li><%= message %></li>
             <% end %>
-            </ul>
+          </ul>
           <% end %>
           <div class="form-group">
             <%= f.label :ハイフンなしの郵便番号 %></br>

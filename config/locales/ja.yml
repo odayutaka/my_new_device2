@@ -1,0 +1,37 @@
+
+ja:
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."
+
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%Y/%m/%d"
+
+  activerecord:
+    attributes:
+      member:
+        name: 名前
+        kana_name: カナメイ
+        phone_number: 電話番号
+        email: メールアドレス
+        password: パスワード
+
+      item:
+        name: 商品名
+        price: 税抜価格
+        introduction: 商品説明
+
+      genre:
+        name: カテゴリ
+
+      address:
+        address: 郵便番号
+        address_name: 宛名
+        postal_code: 郵便番号
+        phone_number: 電話番号

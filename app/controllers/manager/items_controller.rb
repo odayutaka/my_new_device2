@@ -1,6 +1,6 @@
 class Manager::ItemsController < ApplicationController
   def index
-    @items = Item.all.page(params[:page]).reverse_order.per(10)
+    @items = Item.all.page(params[:page]).per(10)
   end
 
   def new

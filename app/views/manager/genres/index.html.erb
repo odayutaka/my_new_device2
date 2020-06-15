@@ -1,9 +1,9 @@
-<h3>カテゴリー一覧・追加</h3>
+<h3>カテゴリ一覧・追加</h3>
 
 <div class="row mt-5">
   <div class="col-md-4">
     <div class="card">
-      <h5 class="card-header text-center">カテゴリーの追加</h5>
+      <h5 class="card-header text-center">カテゴリの追加</h5>
       <div class="card-body">
         <%= form_with model:[:manager, @genre],local: true do |f| %>
           <% if @genre.errors %>
@@ -14,14 +14,15 @@
             </ul>
           <% end %>
           <div class="form-group">
-            <%= f.label :カテゴリー名 %></br>
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-md-12" %>
-          </div>
-          <div class="form-group">
+            <%= f.label :カテゴリ画像 %></br>
             <%= f.attachment_field :genre_image %>
           </div>
           <div class="form-group">
-            <%= f.submit "カテゴリーを追加", class: "btn btn-primary col-md-12" %>
+            <%= f.label :カテゴリ名 %></br>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-md-12" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "カテゴリを追加", class: "btn btn-primary col-md-12" %>
           </div>
         <% end %>
       </div>
@@ -31,8 +32,8 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th>カテゴリー画像</th>
-          <th>カテゴリー</th>
+          <th>カテゴリ画像</th>
+          <th>カテゴリ名</th>
           <th></th>
         </tr>
       </thead>

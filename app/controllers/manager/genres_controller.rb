@@ -7,7 +7,7 @@ class Manager::GenresController < ApplicationController
   def create
     @genre = Genre.new(genre_params)
     if @genre.save
-      redirect_to manager_genres_path, notice: "ジャンルの登録に成功しました"
+      redirect_to manager_genres_path, notice: "カテゴリの登録に成功しました"
       else
       @genres = Genre.all
       render 'index'
@@ -21,7 +21,7 @@ class Manager::GenresController < ApplicationController
   def update
     @genre = Genre.find(params[:id])
     if @genre.update(genre_params)
-    redirect_to manager_genres_path, notice: "ジャンルの編集に成功しました"
+    redirect_to manager_genres_path, notice: "カテゴリの編集に成功しました"
     else
         render 'edit'
       end

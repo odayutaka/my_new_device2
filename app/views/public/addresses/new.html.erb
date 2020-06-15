@@ -4,7 +4,7 @@
       <h5 class="card-header text-center">新しい住所を追加する</h5>
       <div class="card-body">
         <%= form_with model:[:public, @address],locai: true do |f| %>
-          <% if @address.errors.any? %>
+          <% if @address.errors %>
             <ul>
             <% @address.errors.full_messages.each do |message| %>
             <li><%= message %></li>

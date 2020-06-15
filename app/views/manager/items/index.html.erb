@@ -1,0 +1,39 @@
+<h3>商品一覧</h3>
+
+<%= link_to "商品を追加する", new_manager_item_path, class: "btn btn-primary mb-2" %>
+
+<div class="row">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>商品ID</th>
+          <th>商品名</th>
+          <th>価格</th>
+          <th>カテゴリ</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td>
+            <%= link_to edit_manager_item_path(item.id) do %>
+            <%= item.name %>
+            <% end %>
+          </td>
+          <td><%= item.price.to_s(:delimited) %>円</td>
+          <td><%= item.genre.name%></td>
+          <td>
+            <% if item.status == true %>
+              <span>在庫あり</span>
+            <% else %>
+              <span>在庫なし</span>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @items %>
+</div>
