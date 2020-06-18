@@ -1,23 +1,33 @@
-<div class="row">
-  <div class="col-sm-3">
-    <%= render 'public/items/genre_index', genres: @genres %>
+<div class="row mt-2">
+  <ul class="list-group list-group-horizontal">
+    <li class="list-group-item">デバイス一覧</li>
+    <% @genres.each do |genre| %>
+      <%= link_to public_genre_path(genre) do %>
+      <li class="list-group-item">
+        <%= genre.name %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-4">
+    <%= attachment_image_tag @item, :item_image, format:'jpg', size: "300x300", fallback: "/assets/noimage.jpg" %>
   </div>
-  <div class="col-sm-9">
-    <div class="item_image">
-      <%= attachment_image_tag @item, :item_image, format:'jpg', fallback: "/assets/no-image.jpg", class: "card-img-top" %>
-    </div>
-    <div class="text_area">
-      <h3><%= @item.name %></h3>
-      <p><%= @item.introduction %></p>
-      <h5><%= @price.to_s(:delimited) %>円　(税込み)</h5>
-    </div>
-    <div class="bottom-space">
-      <% if member_signed_in? %>
-        <%= form_with model: @cart_item,url: {controller: 'public/cart_items', action: 'create' }, local: true  do |f| %>
+  <div class="col-md-8">
+    <h4 class="item_title"><%= @item.name %></h4>
+    <p class="item_introduction"><%= @item.introduction %></p>
+    <h2 class="item_price">¥<%= @item.price.to_s(:delimited) %></h2>
+    <div class="form-inline">
+      <% if @item.status == true %>
+        <%= form_with model:[:public, @cart_item],local: true do |f| %>
           <%= f.hidden_field :item_id, :value => @item.id %>
-          <%= f.select :number, [["1",1],["2",2],["3",3],["4",4],["5",5],["6",6],["7",7],["8",8],["9",9]],{include_blank: false, selected: 1} %>
-          <%= f.submit "カートに入れる" , class:"btn btn-primary btn-sm"%>
+          購入数: <%= f.select :quantity, [["1",1],["2",2],["3",3],["4",4],["5",5],["6",6],["7",7],["8",8],["9",9]], selected: 1 %>
+          <%= f.submit "カートに入れる" , class: "btn btn-success ml-4 py-2 px-5" %>
         <% end %>
+      <% else %>
+        <h4 class="btn btn-info col-md-8 offset-md-2 py-2">売り切れ</h4>
       <% end %>
     </div>
   </div>

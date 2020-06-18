@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   	resources :members
   	resources :addresses
   	resources :cart_items
+    resources :genres, only:[:show]
+    resources :orders
 	end
 
 	root 'public/homes#top'
