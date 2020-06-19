@@ -2,8 +2,9 @@
 
 <div class="row">
   <h4 class="cart_inside">カートの中身</h4>
+  <% if @cart_items.exists? %>
   <table class="table">
-    <thead>
+    <thead class="thead-light">
       <tr>
         <th>商品画像</th>
         <th>商品詳細</th>
@@ -52,10 +53,14 @@
       </tr>
     </tbody>
   </table>
-</div>
-<div class= "row">
   <div class="col-md-6 offset-md-3">
     <%= link_to "お会計に進む", new_public_order_path, class: "btn btn-success col-md-12" %>
     <%= link_to "買い物を続ける", public_items_path, class: "btn btn-info col-md-12 mt-2" %>
   </div>
+  <% else %>
+    <h5 class="col-md-12 text-center bg-light py-4">カートの中に商品はありません</h5>
+  <div class="col-md-6 offset-md-3">
+    <%= link_to "買い物を続ける", public_items_path, class: "btn btn-info col-md-12 mt-2" %>
+  </div>
+  <% end %>
 </div>

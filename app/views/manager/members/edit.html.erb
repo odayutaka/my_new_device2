@@ -1,6 +1,6 @@
-<h3>アカウント情報の確認と編集</h3>
+<h3><%= @member.name %>様の会員情報の確認と編集</h3>
 
-<%= form_with model:[:public, @member],locai: true do |f| %>
+<%= form_with model:[:manager, @member],locai: true do |f| %>
 <div class="row">
   <div class="col-md-6">
     <div class="card">
@@ -56,16 +56,22 @@
           <%= f.label :メールアドレス %></br>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-md-12" %>
         </div>
+         <div class="form-group">
+          <%= f.label :会員ステータス %></br>
+          <%= f.radio_button :status, :true %>
+          <%= f.label :status, "有効会員", value: true %>
+          <%= f.radio_button :status, :false %>
+          <%= f.label :status, "無効会員", value: false %>
+        </div>
         <div class="form-group">
           <%= f.submit "アカウントを編集", class: "btn btn-success col-md-12" %>
         </div>
         <% end %>
-        <%= link_to "変更せずマイページに戻る", public_member_path, class: "btn btn-info col-md-12 mb-2" %>
-        <%= link_to "パスワードの変更はこちらから", edit_public_member_registration_path %></br>
-        <%= link_to "退会手続き(登録情報の削除)", public_leave_path %>
-        <p>登録情報を削除し、退会手続きを行います。</br>※一度退会されるとログインすることができなくなります</p>
+        <div class="link">
+          <%= link_to "注文履歴を見る", manager_order_path(@member), class: "btn btn-primary col-md-12 mb-3" %>
+          <%= link_to "変更せず会員一覧に戻る", manager_members_path, class: "btn btn-info col-md-12" %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

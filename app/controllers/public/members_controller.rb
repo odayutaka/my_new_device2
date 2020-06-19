@@ -32,7 +32,7 @@ class Public::MembersController < ApplicationController
 
   private
   def member_params
-    params.require(:member).permit(:name,:kana_name,:email,:status,:member_image)
+    params.require(:member).permit(:nick_name,:name,:kana_name,:email,:status,:member_image)
   end
 
   # url直打ちで他のユーザーに飛ばないようにするための記述

@@ -11,6 +11,7 @@ class Member < ApplicationRecord
 
   attachment :member_image
 
+  validates :nick_name, presence: true
   validates :name, presence: true
   validates :kana_name, presence: true
 
@@ -19,6 +20,4 @@ class Member < ApplicationRecord
     super && (self.status == true)
   end
 
-  # 会員一覧をIDの古い順番で表示
-  default_scope -> {order(created_at: :desc)}
 end

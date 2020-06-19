@@ -16,6 +16,7 @@ ja:
   activerecord:
     attributes:
       member:
+        nick_name: ニックネーム
         name: 名前
         kana_name: フリガナ
         phone_number: 電話番号

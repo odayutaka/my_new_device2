@@ -24,9 +24,8 @@ class ApplicationController < ActionController::Base
   	end
 
 	def configure_permitted_parameters
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :kana_name, :email, :is_valid])
-    devise_parameter_sanitizer.permit(:sign_in, keys:[:email])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :kana_name, :email, :is_valid])
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:nick_name, :name, :kana_name, :email, :status])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nick_name, :name, :kana_name, :email, :status])
     # デバイスに追加したカラムを許可する記述
 	end
 end

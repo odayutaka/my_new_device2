@@ -1,0 +1,33 @@
+<h3>会員一覧</h3>
+
+<div class="row">
+  <table class="table bg-light">
+    <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+    </thead>
+
+    <% @members.each do |member| %>
+    <tr>
+      <td><%= member.id %></td>
+      <td>
+        <%= link_to edit_manager_member_path(member.id) do %>
+        <%= member.name %>
+        <% end %>
+      </td>
+      <td><%= member.email %></td>
+      <td>
+        <% if member.status == true %>
+          <span>有効会員</span>
+        <% else %>
+          <span>退会済</span>
+        <% end %>
+      </td>
+     </tr>
+    <% end %>
+  </table>
+</div>

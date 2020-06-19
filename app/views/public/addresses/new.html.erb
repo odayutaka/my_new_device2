@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-5">
   <div class="col-md-6 offset-md-3">
     <div class="card">
       <h5 class="card-header text-center">新しい住所を追加する</h5>
@@ -12,19 +12,19 @@
             </ul>
           <% end %>
           <div class="form-group">
-            <%= f.label :ハイフンなしの郵便番号 %></br>
+            <%= f.label "郵便番号(ハイフンなし)" %></br>
             <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", class: "col-md-12" %>
           </div>
           <div class="form-group">
-            <%= f.label :住所 %></br>
+            <%= f.label "住所" %></br>
             <%= f.text_field :address, autofocus: true, autocomplete: "address", class: "col-md-12" %>
           </div>
           <div class="form-group">
-            <%= f.label :宛名 %></br>
+            <%= f.label "宛名" %></br>
             <%= f.text_field :address_name, autofocus: true, autocomplete: "address_name", class: "col-md-12" %>
           </div>
           <div class="form-group">
-            <%= f.label :ハイフンなしの電話番号 %></br>
+            <%= f.label "電話番号(ハイフンなし)" %></br>
             <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", class: "col-md-12" %>
           </div>
           <div class="form-group">
