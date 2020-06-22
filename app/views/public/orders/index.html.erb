@@ -1,0 +1,48 @@
+<h3>注文履歴一覧</h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead class="bg-light">
+        <tr>
+          <th>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= l order.created_at, format: :short %></td>
+            <td>
+              〒<%= order.postal_code %></br>
+              住所：<%= order.address %></br>
+              宛名：<%= order.address_name %></br>
+              電話番号: <%= order.phone_number %>
+            </td>
+            <td>
+              <% order.order_details.each do |order_detail| %>
+                <%= link_to public_item_path(id: order_detail.item_id) do %>
+                <%= Item.find_by(id: order_detail.item_id).name %></br>
+                <% end %>
+              <% end %>
+            </td>
+            <td><%= order.payment.to_s(:delimited) %>円</td>
+            <td>
+              <% if order.delivery ==true %>
+                <span>発送準備中</span>
+              <% else %>
+                <span>発送済み</span>
+              <% end %>
+            </td>
+            <td><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @orders %>
+  </div>
+</div><!-- /.row -->

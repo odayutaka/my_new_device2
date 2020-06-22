@@ -4,8 +4,10 @@
     <title>my_new_device...</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= include_gon(init: true) %>
     <script src="https://kit.fontawesome.com/61abcfe439.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="https://js.pay.jp/"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>

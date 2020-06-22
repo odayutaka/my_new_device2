@@ -1,0 +1,37 @@
+<h3>お届け先の指定・変更</h3>
+
+ <!-- モデルは利用せず選択肢にオリジナルのカラムを作成・送信しコントローラーで操作 -->
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <%= form_with(local: true, url: public_orders_confirm_path) do |f| %>
+    <% if current_public_member.addresses.present? %>
+      <div class="form-group">
+        <%= f.radio_button :address_option, 0 %>
+        <%= f.label "登録済住所から選択" %></br>
+        <%= f.collection_select(:address_collection, current_public_member.addresses, :id, :address_info, {prompt: "住所を選択してください"}, class: "col-md-12 p-1") %>
+      </div>
+    <% end %>
+        <%= f.radio_button :address_option, 1, checked: true%>
+        <%= f.label "新しいお届け先" %></br>
+     	<div class="form-group">
+        <%= f.label "郵便番号(ハイフンなし)" %></br>
+        <%= f.text_field :new_postal_code, class: "col-md-12" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "住所" %></br>
+        <%= f.text_field :new_address, class: "col-md-12" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "宛名" %></br>
+        <%= f.text_field :new_address_name, class: "col-md-12" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "電話番号(ハイフンなし)" %></br>
+        <%= f.text_field :new_phone_number, class: "col-md-12" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "確認画面へ進む",class: "btn btn-primary col-md-12" %>
+      </div>
+    <% end %>
+  </div>
+</div>

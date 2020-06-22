@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   	resources :cart_items
     resources :genres, only:[:show]
     resources :orders
+    resources :cards
 	end
 
 	root 'public/homes#top'

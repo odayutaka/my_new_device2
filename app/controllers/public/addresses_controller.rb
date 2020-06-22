@@ -1,11 +1,12 @@
 class Public::AddressesController < ApplicationController
   before_action :authenticate_public_member!
+  before_action :correct_member, only: [:edit, :update]
   def new
     @address = Address.new
   end
 
   def index
-    @addresses =Address.all
+    @addresses = current_public_member.addresses
   end
 
   def edit
@@ -40,5 +41,13 @@ class Public::AddressesController < ApplicationController
   private
   def address_params
     params.require(:address).permit(:postal_code,:address,:address_name,:phone_number,:member_id)
+  end
+
+  # url直打ちで他のアドレスに飛ばないようにするための記述
+  def correct_member
+    @address = Address.find(params[:id])
+    unless current_public_member.id == @address.member_id then
+      redirect_to public_addresses_path
+    end
   end
 end

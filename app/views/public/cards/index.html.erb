@@ -1,0 +1,27 @@
+<h3>クレジットカードを情報を確認する</h3>
+
+<div class="row">
+  <% if @card.present? %>
+    <div class=col-md-4>
+      <div class="card address_card">
+        <div class="card-body">
+          <div>
+            <%= image_tag "#{@card_src}", width: 60, height: 43 %></br>
+            <%= "カード番号:　**** **** ****" + @card_info.last4 %></br>
+            <%= "有効期限:　　" + @exp_month + " 月/ " + @exp_year + "年" %></br>
+          </div>
+          <div class="address_link">
+            <%= link_to "削除する", public_card_path(@card), {method: :delete, id: 'charge-form', name: "inputForm", class: "col-md-8", data: {confirm: "クレジットカード情報を一件削除します"}} %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%= link_to new_public_card_path do %>
+    <div class="card add_address_card link_text">
+      <i class="fas fa-plus fa-5x col text-center mt-5"></i>
+      <h4 class="card-body text-center">新しいクレジットカードを登録</h4>
+    </div>
+    <% end %>
+  <% end %>
+</div>

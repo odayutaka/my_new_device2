@@ -8,6 +8,7 @@ class Member < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :items, through: :cart_items
+  has_one :card, dependent: :destroy
 
   attachment :member_image
 
