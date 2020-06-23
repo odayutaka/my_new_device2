@@ -3,6 +3,7 @@
 <%= link_to "商品を追加する", new_manager_item_path, class: "btn btn-primary mb-2" %>
 
 <div class="row">
+  <div class="col-md-12">
     <table class="table">
       <thead class="thead-light">
         <tr>
@@ -36,4 +37,5 @@
       </tbody>
     </table>
     <%= paginate @items %>
+  </div>
 </div>

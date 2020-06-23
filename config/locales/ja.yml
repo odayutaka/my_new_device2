@@ -32,7 +32,7 @@ ja:
         name: カテゴリ
 
       address:
-        address: 郵便番号
+        address: 住所
         address_name: 宛名
         postal_code: 郵便番号
         phone_number: 電話番号

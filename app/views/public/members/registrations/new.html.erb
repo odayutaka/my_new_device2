@@ -4,13 +4,7 @@
       <h5 class="card-header text-center">アカウントを作成</h5>
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <% if resource.errors.any? %>
-            <ul>
-              <% resource.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          <% end %>
+          <%= render 'layouts/error_messages', model: f.object %>
           <div class="form-group">
             <%= f.label "ニックネーム" %></br>
             <%= f.text_field :nick_name, autofocus: true, autocomplete: "nick_name", class: "col-md-12" %>

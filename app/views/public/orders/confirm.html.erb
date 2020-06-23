@@ -10,7 +10,8 @@
           <div class="col-md-6">
             <h5>お届け先住所</h5>
             <%= @order.address_name %></br>
-            <span>〒</span><%= @order.postal_code %></br>
+            <span>〒</span>
+            <%= @order.postal_code %></br>
             <%= @order.address %><br>
             <%= @order.phone_number %>
             <%= f.hidden_field :postal_code %>

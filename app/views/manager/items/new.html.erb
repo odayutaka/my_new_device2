@@ -33,13 +33,7 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <% if @item.errors %>
-        <ul>
-          <% @item.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-          <% end %>
-        </ul>
-        <% end %>
+        <%= render 'layouts/error_messages', model: f.object %>
           <div class="form-group">
             <%= f.label :商品名 %></br>
             <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-md-12" %>

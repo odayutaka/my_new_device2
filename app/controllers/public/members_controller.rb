@@ -19,7 +19,7 @@ class Public::MembersController < ApplicationController
     if @member.update(member_params)
       redirect_to public_member_path(current_public_member.id), notice: "ユーザー情報の編集に成功しました"
     else
-    render 'edit'
+      render 'edit'
     end
   end
 

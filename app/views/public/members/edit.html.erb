@@ -1,6 +1,6 @@
 <h3>アカウント情報の確認と編集</h3>
 
-<%= form_with model:[:public, @member],locai: true do |f| %>
+<%= form_with model:[:public, @member],local: true do |f| %>
 <div class="row">
   <div class="col-md-6">
     <div class="card">
@@ -33,13 +33,7 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <% if @member.errors.any? %>
-          <ul>
-            <% @member.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        <% end %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <div class="form-group">
           <%= f.label :ニックネーム %></br>
           <%= f.text_field :nick_name, autofocus: true, autocomplete: "nick_name", class: "col-md-12" %>

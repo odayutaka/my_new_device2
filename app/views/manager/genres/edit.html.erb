@@ -4,13 +4,7 @@
       <h5 class="card-header text-center">カテゴリの編集</h5>
       <div class="card-body">
         <%= form_with model:[:manager, @genre],local: true do |f| %>
-          <% if @genre.errors %>
-            <ul>
-            <% @genre.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-            </ul>
-          <% end %>
+          <%= render 'layouts/error_messages', model: f.object %>
           <div class="form-group">
             <%= f.label :カテゴリ名 %></br>
             <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-md-12" %>

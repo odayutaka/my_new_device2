@@ -3,14 +3,8 @@
     <div class="card">
       <h5 class="card-header text-center">新しい住所を追加する</h5>
       <div class="card-body">
-        <%= form_with model:[:public, @address],locai: true do |f| %>
-          <% if @address.errors %>
-            <ul>
-            <% @address.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-            </ul>
-          <% end %>
+        <%= form_with model:[:public, @address],local: true do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
           <div class="form-group">
             <%= f.label "郵便番号(ハイフンなし)" %></br>
             <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", class: "col-md-12" %>
