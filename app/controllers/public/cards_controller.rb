@@ -1,4 +1,5 @@
 class Public::CardsController < ApplicationController
+  before_action :authenticate_public_member!
   before_action :set_card, only: [:new, :index, :destroy]
   before_action :set_payjpSecretKey, except: :new
   before_action :correct_member

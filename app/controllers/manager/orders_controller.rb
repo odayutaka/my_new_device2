@@ -1,5 +1,5 @@
 class Manager::OrdersController < ApplicationController
-  before_action :authenticate_admin!, only: [:today, :member, :index, :edit, :update]
+  before_action :authenticate_manager_admin!
 
   def today
     @orders = Order.where(created_at: Time.zone.now.all_day).page(params[:page]).reverse_order.per(10)

@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_public_member!
   before_action :set_addresses, only: [:new, :create, :edit, :update]
 
 	def thanks

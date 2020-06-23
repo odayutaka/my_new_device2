@@ -1,5 +1,6 @@
 class Manager::MembersController < ApplicationController
-  before_action :authenticate_admin!, only: [:index, :create, :edit, :update]
+  before_action :authenticate_admin!
+
   def index
     @members = Member.page(params[:page]).per(10)
   end

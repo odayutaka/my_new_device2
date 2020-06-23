@@ -1,6 +1,7 @@
 class Public::AddressesController < ApplicationController
   before_action :authenticate_public_member!
   before_action :correct_member, only: [:edit, :update]
+
   def new
     @address = Address.new
   end
