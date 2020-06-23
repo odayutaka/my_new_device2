@@ -1,7 +1,6 @@
 <h3>注文情報確認</h3>
 
 <%= form_with(model: @order, local: true, url: {action: 'create'}) do |f| %>
-
 <div class="row">
   <div class="col-md-9">
     <div class="card mb-3">
@@ -60,7 +59,7 @@
       <h5 class="card-header">注文内容</h5>
       <div class="card-body">
         送料:　　 <%= @postage %>円</br>
-        商品合計: <%= @total_price.to_s(:delimited) %>円
+        商品小計: <%= @total_price.to_s(:delimited) %>円
       </div>
       <div class="card-footer bg-white">
         請求金額: <%= @payment.to_s(:delimited) %>円

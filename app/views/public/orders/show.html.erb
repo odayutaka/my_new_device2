@@ -1,74 +1,69 @@
-<h3>注文履歴詳細</h3>
+<h3>注文詳細</h3>
 
-<div class="row bottom_space">
-  <div class="col-sm-6">
-    <h3>注文情報</h3>
-    <table class="table table-bordered">
-      <tr>
-        <th class="col-xs-3 table_color">注文日</th>
-        <th><%= l @order.created_at, format: :short %></th>
-      </tr>
-      <tr>
-        <th class="col-xs-3 table_color">配送先</th>
-        <th><%= @order.postal_code %><%= @order.address %><br><%= @order.address_name %></th>
-      </tr>
-      <tr>
-        <th class="col-xs-3 table_color">支払い方法</th>
-        <th>クレジットカード</th>
-      </tr>
-      <tr>
-        <th class="col-xs-3 table_color">ステータス</th>
-        <th><% if @order.delivery ==true %>
-              <span>発送準備中</span>
-            <% else %>
-              <span>発送済み</span>
-            <% end %>
-        </th>
-      </tr>
-    </table>
-  </div>
-
-  <div class="col-sm-3">
-    <h3>請求情報</h3>
-    <table class="table table-bordered">
-      <tr>
-        <th class="col-xs-6 table_color">配送料</th>
-        <th><%= @postage %>円</th>
-      </tr>
-      <tr>
-        <th class="col-xs-6 table_color">商品合計</th>
-        <th><%= @total_price.to_s(:delimited) %>円</th>
-      </tr>
-      <tr>
-        <th class="col-xs-6 table_color">ご請求額</th>
-        <th><%= @payment.to_s(:delimited) %>円</th>
-      </tr>
-    </table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-3">
+    <h5 class="card-header">
+      <span>注文日: </span>
+      <%= l @order.created_at, format: :short %>
+      <span>　　　配送状況: </span>
+      <% if @order.delivery ==true %>
+        <span>発送準備中</span>
+      <% else %>
+        <span>発送済み</span>
+      <% end %>
+    </h5>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>お届け先住所</h5>
+            <%= @order.address_name %></br>
+            <%= @order.postal_code %></br>
+            <%= @order.address %></br>
+            <%= @order.phone_number %>
+          </div>
+          <div class="col-md-4">
+            <h5>クレジットカード情報</h5>
+          </div>
+          <div class="col-md-4">
+            <h5>請求詳細</h5>
+            送料:　　 <%= @postage %>円</br>
+            商品小計: <%= @total_price.to_s(:delimited) %>円</br>
+            請求金額: <%= @payment.to_s(:delimited) %>円
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-sm-7">
-  <h3>注文内容</h3>
-  <table class="table table-bordered">
-    <thead>
-      <tr class="table_color">
-        <th class="col-xs-6">商品名</th>
-        <th class="col-xs-3">単価（税込）</th>
-        <th class="col-xs-1">個数</th>
-        <th class="col-xs-1">小計</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @order.order_details.each do |order_detail| %>
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead class="bg-light">
         <tr>
-          <td><%= order_detail.item.name %></td>
-          <td><%= order_detail.item.price.to_s(:delimited) %>円</td>
-          <td><%= order_detail.quantity %>個</td>
-          <td><%= (order_detail.item.price * order_detail.quantity).to_s(:delimited) %>円</td>
+          <th>商品画像</th>
+          <th>商品詳細</th>
+          <th>個数</th>
+          <th>小計</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  </div><!-- /.col-xs-7 -->
-</div><!-- /.row -->
+      </thead>
+      <tbody>
+        <% @order.order_details.each do |order_detail| %>
+          <tr>
+            <td><%= attachment_image_tag order_detail.item, :item_image, size: "60x60", fallback: "/assets/noimage.jpg" %></td></td>
+            <td>
+              <%= link_to public_item_path(id: order_detail.item_id) do %>
+              <%= order_detail.item.name %></br>
+              <% end %>
+              <%= order_detail.item.price.to_s(:delimited) %>円</td>
+            <td><%= order_detail.quantity %>個</td>
+            <td><%= (order_detail.item.price * order_detail.quantity).to_s(:delimited) %>円</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= link_to '注文履歴一覧に戻る', public_orders_path, class: "btn btn-primary col-md-6 offset-md-3" %>
+</div>
+</div>

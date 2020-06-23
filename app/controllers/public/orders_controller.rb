@@ -5,7 +5,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_public_member.orders.page(params[:page]).reverse_order.per(6)
+    @orders = current_public_member.orders.page(params[:page]).reverse_order.per(5)
   end
 
   def new
@@ -56,7 +56,7 @@ class Public::OrdersController < ApplicationController
       end
 
     current_public_member.cart_items.destroy_all
-    redirect_to public_orders_thanks_path
+    redirect_to public_thanks_path
   end
 
   def confirm

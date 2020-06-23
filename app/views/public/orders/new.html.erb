@@ -3,7 +3,7 @@
  <!-- モデルは利用せず選択肢にオリジナルのカラムを作成・送信しコントローラーで操作 -->
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <%= form_with(local: true, url: public_orders_confirm_path) do |f| %>
+    <%= form_with(local: true, url: public_confirm_path) do |f| %>
     <% if current_public_member.addresses.present? %>
       <div class="form-group">
         <%= f.radio_button :address_option, 0 %>

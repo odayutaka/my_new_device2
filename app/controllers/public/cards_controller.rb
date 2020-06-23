@@ -64,7 +64,7 @@ class Public::CardsController < ApplicationController
     @card.destroy
     customer.delete
     flash[:notice] = 'クレジットカードが削除されました'
-    redirect_to action: :show, id: current_public_member.id
+    redirect_to action: :index, id: current_public_member.id
   end
 
   private

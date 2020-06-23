@@ -7,12 +7,11 @@ Rails.application.routes.draw do
 	  	passwords: 'manager/admins/passwords'
   	}
   	get 'top' => 'admins#top'
-  	get 'orders/today' => 'orders#today'
+  	get 'today' => 'orders#today'
   	resources :items
   	resources :members
   	resources :orders
   	resources :genres
-  	resources :order_details, only: [:update]
 	end
 
   namespace :public do
@@ -23,9 +22,9 @@ Rails.application.routes.draw do
   	}
   	patch 'leave' => 'members#update_status'
     get 'leave' => 'members#leave'
-  	get 'orders/thanks' => 'orders#thanks'
-  	post 'orders/confirm' => 'orders#confirm'
-    get 'orders/member' => 'orders#member'
+  	get 'thanks' => 'orders#thanks'
+  	post 'confirm' => 'orders#confirm'
+    get 'confirm' => 'orders#new'
     get 'about' => 'homes#about'
   	resources :items
   	resources :members
