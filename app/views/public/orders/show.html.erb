@@ -4,7 +4,8 @@
   <div class="col-md-12">
     <div class="card mb-3">
     <h5 class="card-header">
-      購入者 : <%= @order.member.name %>
+      <span>購入者 : </span>
+      <%= @order.member.name %>
     </h5>
       <div class="card-body">
         <div class="row">
@@ -16,7 +17,12 @@
             <%= @order.phone_number %>
           </div>
           <div class="col-md-4">
-            <h5>クレジットカード情報</h5>
+            <h5>配送状況</h5>
+            <% if @order.delivery ==true %>
+              <span>発送準備中</span>
+            <% else %>
+              <span>発送済み</span>
+            <% end %>
           </div>
           <div class="col-md-4">
             <h5>請求詳細</h5>
