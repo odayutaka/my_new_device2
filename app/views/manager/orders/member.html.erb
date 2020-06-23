@@ -1,4 +1,4 @@
-<h3>本日の注文一覧</h3>
+<h3><%= @member.name %>様の注文履歴一覧</h3>
 
 <div class="row">
   <div class="col-md-12">
@@ -6,7 +6,7 @@
       <thead class="bg-light">
         <tr>
           <th>購入日時</th>
-          <th>購入者</th>
+          <th>宛名</th>
           <th>配送状況</th>
         </tr>
       </thead>
@@ -14,7 +14,7 @@
         <% @orders.each do |order| %>
           <tr>
             <td><%= link_to l(order.created_at), edit_manager_order_path(order.id) %></td>
-            <td><%= order.member.name %></td>
+            <td><%= order.address_name %></td>
             <td>
               <% if order.delivery ==true %>
                 <span>発送準備中</span>

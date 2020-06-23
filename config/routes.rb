@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   	}
   	get 'top' => 'admins#top'
   	get 'today' => 'orders#today'
+    get 'members/:id/order' => 'orders#member', as: 'member_order'
   	resources :items
   	resources :members
   	resources :orders

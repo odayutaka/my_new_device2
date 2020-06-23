@@ -1,1 +1,15 @@
-Hello! admintop!
+<h3>管理者画面</h3>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <h5 class="card-header text-center">本日の注文件数</h5>
+      <div class="card-body">
+        <h2 class="text-center"><%= @orders.count %>件</h2>
+        <div class="form-group">
+          <%= link_to "仕事を始める", manager_today_path, class: "btn btn-success col-md-12 mt-3" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

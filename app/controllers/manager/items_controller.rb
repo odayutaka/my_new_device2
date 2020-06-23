@@ -1,4 +1,6 @@
 class Manager::ItemsController < ApplicationController
+  before_action :authenticate_admin!, only: [:index, :new, :create, :edit, :update]
+
   def index
     @items = Item.page(params[:page]).per(10)
   end
