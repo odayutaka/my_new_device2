@@ -25,6 +25,9 @@
           </div>
           <div class="col-md-6">
             <h5>クレジットカード情報</h5>
+            <%= image_tag "#{@card_src}", width: 60, height: 43 %></br>
+            <%= "カード番号:　**** **** ****" + @card_info.last4 %></br>
+            <%= "有効期限:　　" + @exp_month + " 月/ " + @exp_year + "年" %></br>
           </div>
         </div>
       </div>

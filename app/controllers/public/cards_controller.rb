@@ -18,7 +18,7 @@ class Public::CardsController < ApplicationController
       description: 'test',
       email: current_public_member.email,
       card: params['payjpToken'],
-      metadata: {member_id: current_public_member.id}
+      metadata: {顧客名: current_public_member.name}
     )
     @card = Card.new(
       card_id: customer.default_card,

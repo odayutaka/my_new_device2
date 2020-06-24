@@ -1,5 +1,7 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_public_member!
+  before_action :set_card
+  before_action :set_payjpSecretKey
   before_action :set_addresses, only: [:new, :create, :edit, :update]
 
 	def thanks
@@ -10,6 +12,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def new
+    if @current_public_member.card.blank?
+      #登録された情報がない場合にカード登録画面に移動
+      flash[:alert] = "購入前にご自身のクレジットカードを登録してください"
+      redirect_to public_cards_path
+    end
   end
 
   def show
@@ -29,15 +36,18 @@ class Public::OrdersController < ApplicationController
     @order.member_id = current_public_member.id
     @order.save!
 
+    # 新しい住所を入力した時addressDBに保存するための記述
     @new_postal_code = params[:postal_code]
     @new_address = params[:address]
     @new_address_name = params[:address_name]
     @new_phone_number = params[:phone_number]
-    @address = Address.where(member_id: current_public_member,
-                             postal_code: @new_postal_code,
-                             address: @new_address,
-                             address_name: @new_address_name,
-                             phone_number: @new_phone_number)
+    @address = Address.where(
+      member_id: current_public_member,
+      postal_code: @new_postal_code,
+      address: @new_address,
+      address_name: @new_address_name,
+      phone_number: @new_phone_number
+      )
     if @address.blank?
       @address = Address.new
       @address.postal_code = @new_postal_code
@@ -50,9 +60,12 @@ class Public::OrdersController < ApplicationController
 
     # オーダー詳細作成
       current_public_member.cart_items.each do |cart_item|
-        @order_detail = OrderDetail.new(item_id: cart_item.item.id,
-                                        order_id: @order.id , quantity: cart_item.quantity,
-                                        price: cart_item.item.price)
+        @order_detail = OrderDetail.new(
+          item_id: cart_item.item.id,
+          order_id: @order.id,
+          quantity: cart_item.quantity,
+          price: cart_item.item.price
+          )
         @order_detail.save!
       end
 
@@ -66,7 +79,7 @@ class Public::OrdersController < ApplicationController
     @order.member_id = current_public_member.id
 
     if params[:address_option] == 0.to_s
-      # addressDBのidを対象にしてkey=:address_collection、value=idを検索の材料にする
+      # addressDBのidを対象にしてkey=:address_collectionからデータを取得
       @chosen_address = Address.find_by(id: params[:address_collection])
       @order.postal_code = @chosen_address.postal_code
       @order.address = @chosen_address.address
@@ -79,7 +92,7 @@ class Public::OrdersController < ApplicationController
       @order.address_name = params[:new_address_name]
       @order.phone_number = params[:new_phone_number]
     end
-
+    # 支払い金額を計算
     @postage = 500.to_i
     @total_price = 0
     @cart_items.each do |cart_item|
@@ -88,14 +101,50 @@ class Public::OrdersController < ApplicationController
     end
     @payment = @total_price.to_i + @postage
 
-
+    # カード情報を表示
+    customer = Payjp::Customer.retrieve(@card.customer_id)
+    default_card_information = customer.cards.retrieve(@card.card_id)
+    @card_info = customer.cards.retrieve(@card.card_id)
+    @exp_month = default_card_information.exp_month.to_s
+    @exp_year = default_card_information.exp_year.to_s.slice(2,3)
+    customer_card = customer.cards.retrieve(@card.card_id)
+    @card_brand = customer_card.brand
+    case @card_brand = customer_card.brand
+    when "Visa"
+      @card_src = "visa.png"
+    when "JCB"
+      @card_src = "jcb.png"
+    when "MasterCard"
+      @card_src = "master_card.png"
+    when "American Express"
+      @card_src = "american_express.png"
+    when "Diners Club"
+      @card_src = "diners_club.png"
+    when "Discover"
+      @card_src = "discover.png"
+    end
+    # pay.jpに売上げを登録
+    @purchaseByCard = Payjp::Charge.create(
+      amount: @payment,
+      customer: @card.customer_id,
+      currency: 'jpy',
+      card: params['payjpToken']
+      )
   end
 
 
   private
 
+    def set_card
+      @card = Card.where(member_id: current_public_member.id).first
+    end
+
     def set_addresses
       @addresses = Address.where(member_id: current_public_member.id)
+    end
+
+    def set_payjpSecretKey
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
     end
 
     def order_params
