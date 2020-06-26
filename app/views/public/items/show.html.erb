@@ -16,6 +16,10 @@
   </div>
   <div class="col-md-8">
     <h4 class="item_title"><%= @item.name %></h4>
+    <div class="rating">
+      <%= @item.reviews.count %>件の評価
+      <div id="star-rate-<%= @item.id %>"></div>
+    </div>
     <p class="item_introduction"><%= @item.introduction %></p>
     <h2 class="item_price">¥<%= @item.price.to_s(:delimited) %></h2>
     <div class="form-inline">
@@ -31,3 +35,111 @@
     </div>
   </div>
 </div>
+
+<div class="row mt-5">
+  <div class="col-md-4">
+    <div class="card">
+      <h5 class="card-header text-center">この商品をレビュー</h5>
+      <div class="card-body">
+        <p>１商品に対してレビューは</br>１つまで投稿できます</p>
+        <% if public_member_signed_in? %>
+          <%= form_with model:[@item, @review], url: public_reviews_path, local: true do |f| %>
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= render 'layouts/error_messages', model: f.object %>
+            <div class="form-group">
+              <%= f.label "タイトル(20字以内)" %></br>
+              <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "col-md-12" %>
+            </div>
+            <div class="form-group" id="star">
+              <%= f.label "評価" %></br>
+              <%= f.hidden_field :rating, id: :review_star %>
+            </div>
+            <div class="form-group">
+              <%= f.label "コメント(100字以内)" %></br>
+              <%= f.text_area :comment, autofocus: true, autocomplete: "comment", class: "col-md-12" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit "レビューを投稿する", class: "btn btn-success col-md-12" %>
+            </div>
+          <% end %>
+        <% else %>
+          <h5>レビューするにはログインが必要です</h5>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+  <% if @reviews.exists? %>
+    <table class="table">
+      <% @reviews.each do |review| %>
+      <thead>
+        <tr>
+          <th>
+            <%= attachment_image_tag review.member, :member_image, size: "40x40", format: 'jpeg',fallback: "noimage.jpg" %>
+            <%= review.member.nick_name %><span>　　　</span>
+            <%= l(review.created_at) %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= review.title %>
+            <div id="star-rate-<%= review.id %>"></div>
+            <script>
+              $('#star-rate-<%= review.id %>').raty({
+                size: 36,
+                starOff:  "<%= asset_path("star-off.png") %>",
+                starOn : "<%= asset_path("star-on.png") %>",
+                starHalf: "<%= asset_path("star-half.png") %>",
+                half: true,
+                readOnly: true,
+                score: <%= review.rating %>,
+              });
+            </script>
+            <%= review.comment %></br>
+            <% if current_public_member == review.member %>
+            <%= link_to "削除する", public_item_review_path(@item, review), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  <% else %>
+    <h5 class="text-center bg-light py-4">商品のレビューはまだありません</h5>
+  <% end %>
+  </div>
+</div>
+
+<script>
+$("#star").raty({
+  size     : 36,
+  starOff:  "<%= asset_path("star-off.png") %>",
+  starOn : "<%= asset_path("star-on.png") %>",
+  starHalf: "<%= asset_path("star-half.png") %>",
+  scoreName: "review[rating]",
+  half: true,
+});
+</script>
+
+<script>
+$('#star-rate-<%= @item.id %>').raty({
+  size: 36,
+  starOff:  "<%= asset_path("star-off.png") %>",
+  starOn : "<%= asset_path("star-on.png") %>",
+  starHalf: "<%= asset_path("star-half.png") %>",
+  half: true,
+  readOnly: true,
+  score: <%= @item.reviews.average(:rating).to_f.round(1) %>,
+});
+</script>
+
+
+
+
+
+
+
+
+

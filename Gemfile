@@ -73,8 +73,6 @@ gem 'rails-i18n'
 gem 'ransack'
 # グラフ機能用gem
 gem 'chartkick'
-# 星の評価機能用gem
-gem 'ratyrate'
 # アプリ名変更用gem
 gem 'rename'
 # 決済機能用gem

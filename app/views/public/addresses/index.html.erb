@@ -12,12 +12,10 @@
     <div class=col-md-4>
     <div class="card address_card">
       <div class="card-body">
-        <p>
-          <%= address.address_name %></br>
-          〒 <%= address.postal_code %></br>
-          <%= address.address %></br>
-          電話番号: <%= address.phone_number %>
-        </p>
+        <%= address.address_name %></br>
+        〒 <%= address.postal_code %></br>
+        <%= address.address %></br>
+        電話番号: <%= address.phone_number %>
         <div class="address_link">
           <%= link_to "編集する", edit_public_address_path(address) %> |
           <%= link_to "削除する", public_address_path(address), method: :delete, data: {confirm: "アドレスを一件削除します"} %>

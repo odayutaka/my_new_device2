@@ -3,7 +3,6 @@
 <div class="row">
   <div class="col-md-3">
     <ul class="list-group">
-      <li class="list-group-item">デバイス一覧</li>
       <% @genres.each do |genre| %>
         <%= link_to public_genre_path(genre) do %>
         <li class="list-group-item">
@@ -27,6 +26,21 @@
           <div class="card-body">
             <h5 class="card-title"><%= item.name %></h5>
             <p class="card-text">¥<%= item.price.to_s(:delimited) %></p>
+            <div class="rating">
+              <%= item.reviews.count %>件の評価
+              <div id="star-rate-<%= item.id %>"></div>
+              <script>
+              $('#star-rate-<%= item.id %>').raty({
+                size: 36,
+                starOff:  "<%= asset_path("star-off.png") %>",
+                starOn : "<%= asset_path("star-on.png") %>",
+                starHalf: "<%= asset_path("star-half.png") %>",
+                half: true,
+                readOnly: true,
+                score: <%= item.reviews.average(:rating).to_f.round(1) %>,
+              });
+              </script>
+            </div>
           </div>
         </div>
       </div>

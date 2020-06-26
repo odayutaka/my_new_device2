@@ -13,6 +13,7 @@ ja:
       default: "%Y/%m/%d %H:%M:%S"
       short: "%Y/%m/%d"
 
+  # バリデーション日本語化
   activerecord:
     attributes:
       member:
@@ -22,6 +23,7 @@ ja:
         phone_number: 電話番号
         email: メールアドレス
         password: パスワード
+        current_password: 現在のパスワード
 
       item:
         name: 商品名

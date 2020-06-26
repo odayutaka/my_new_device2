@@ -27,13 +27,16 @@ Rails.application.routes.draw do
   	post 'confirm' => 'orders#confirm'
     get 'confirm' => 'orders#new'
     get 'about' => 'homes#about'
-  	resources :items
+  	resources :items do
+      resources :reviews, only:[:destroy]
+    end
   	resources :members
   	resources :addresses
   	resources :cart_items
     resources :genres, only:[:show]
     resources :orders
     resources :cards
+    resources :reviews, only:[:create]
 	end
 
 	root 'public/homes#top'

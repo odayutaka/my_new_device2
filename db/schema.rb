@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_120145) do
     t.integer "item_id", null: false
     t.string "title", null: false
     t.text "comment", null: false
-    t.float "rate", null: false
+    t.float "rating", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_reviews_on_id"
