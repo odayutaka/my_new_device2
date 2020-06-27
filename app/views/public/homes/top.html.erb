@@ -1,1 +1,67 @@
-Hello! World
+<div class="row">
+	<div clsss="col-md-12">
+    <div>
+      <%= image_tag "top1.jpg", class: "top" %>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="text_contents">
+    <h5>
+      このサイトは、ゲーミングデバイスのECサイトになります。<br>
+      会員でない方も商品をご覧になれますが、<br>
+      購入には会員登録が必要になります。
+    </h5>
+  </div>
+</div>
+<h4 class="m-3">カテゴリから選ぶ</h3>
+<div class="row">
+  <% @genres.each do |genre| %>
+  <div class="col-md-2 mb-4">
+    <%= link_to public_genre_path(genre) do %>
+    <div class="card">
+      <%= attachment_image_tag genre, :genre_image, format:'jpg', fallback: "/assets/noimage.jpg", class: "card-img-top" %>
+      <div class="card-body">
+        <%= genre.name %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+<h4 class="m-3">おすすめ商品一覧</h4>
+<div class="row">
+  <% @items.each do |item| %>
+  <div class="col-md-3 mb-4">
+    <%= link_to public_item_path(item) do %>
+    <div class="card">
+      <%= attachment_image_tag item, :item_image, format:'jpg', fallback: "/assets/noimage.jpg", class: "card-img-top" %>
+      <div class="card-body">
+        <%= item.name %></br>
+        ¥<%= item.price.to_s(:delimited) %>
+        <div class="rating">
+          <%= item.reviews.count %>件の評価
+          <div id="star-rate-<%= item.id %>"></div>
+          <script>
+          $('#star-rate-<%= item.id %>').raty({
+            size: 36,
+            starOff:  "<%= asset_path("star-off.png") %>",
+            starOn : "<%= asset_path("star-on.png") %>",
+            starHalf: "<%= asset_path("star-half.png") %>",
+            half: true,
+            readOnly: true,
+            score: <%= item.reviews.average(:rating).to_f.round(1) %>,
+          });
+          </script>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+  <%= link_to "商品をもっと見る", public_items_path, class: "btn btn-primary col-md-6 offset-md-3" %>
+</div>
+
+
+

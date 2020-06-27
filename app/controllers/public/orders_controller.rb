@@ -69,6 +69,23 @@ class Public::OrdersController < ApplicationController
         @order_detail.save!
       end
 
+    # pay.jpに売上げを登録
+    @cart_items = current_public_member.cart_items
+    @postage = 500.to_i
+    @total_price = 0
+    @cart_items.each do |cart_item|
+      subtotal_price = cart_item.item.price * cart_item.quantity
+      @total_price += subtotal_price
+    end
+    @payment = @total_price.to_i + @postage
+
+    @purchaseByCard = Payjp::Charge.create(
+      amount: @payment,
+      customer: @card.customer_id,
+      currency: 'jpy',
+      card: params['payjpToken']
+      )
+
     current_public_member.cart_items.destroy_all
     redirect_to public_thanks_path
   end
@@ -123,18 +140,9 @@ class Public::OrdersController < ApplicationController
     when "Discover"
       @card_src = "discover.png"
     end
-    # pay.jpに売上げを登録
-    @purchaseByCard = Payjp::Charge.create(
-      amount: @payment,
-      customer: @card.customer_id,
-      currency: 'jpy',
-      card: params['payjpToken']
-      )
   end
 
-
   private
-
     def set_card
       @card = Card.where(member_id: current_public_member.id).first
     end

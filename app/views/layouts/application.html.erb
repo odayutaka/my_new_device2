@@ -30,6 +30,7 @@
               <li class="nav-item mr-3"><%= link_to "ログアウト", destroy_public_member_session_path, method: :delete, class: "btn btn-dark"%></li>
             </ul>
             <div class="form-inline mt-3 justify-content-end">
+              <h5 class="nav-item mr-5 mt-2 text-white">ようこそ、<%= current_public_member.name %>さん!</h5>>
               <%= search_form_for @search, url: public_items_path do |f| %>
               <%= f.text_field :name_cont ,placeholder: "商品を検索" %>
               <button type="submit" class="btn btn-dark mr-3"><i class="fas fa-search"></i></button>
@@ -75,9 +76,9 @@
         <%= yield %>
       </div>
       <!-- フッターの記述 -->
-    <footer class="fixed-bottom">
+    <footer>
       <div class="row footer justify-content-center">
-        <p>CopyRight Odayutaka</p>
+        <p class="footer_text m-3">CopyRight Odayutaka</p>
       </div>
     </footer>
   </body>

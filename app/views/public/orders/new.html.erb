@@ -8,7 +8,7 @@
       <div class="form-group">
         <%= f.radio_button :address_option, 0 %>
         <%= f.label "登録済住所から選択" %></br>
-        <%= f.collection_select(:address_collection, current_public_member.addresses, :id, :address_info, {prompt: "住所を選択してください"}, class: "col-md-12 p-1") %>
+        <%= f.collection_select(:address_collection, current_public_member.addresses, :id, :address_info) %>
       </div>
     <% end %>
         <%= f.radio_button :address_option, 1, checked: true%>
