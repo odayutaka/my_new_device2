@@ -108,6 +108,10 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:new_address]
       @order.address_name = params[:new_address_name]
       @order.phone_number = params[:new_phone_number]
+      if params[:new_postal_code].blank? or params[:new_address].blank? or params[:new_address_name].blank? or params[:new_phone_number].blank?
+        flash[:notice] = "必要項目を入力してください"
+        render 'new'
+      end
     end
     # 支払い金額を計算
     @postage = 500.to_i

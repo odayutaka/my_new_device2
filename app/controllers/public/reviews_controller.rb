@@ -11,8 +11,7 @@ class Public::ReviewsController < ApplicationController
       flash[:notice] = "レビューの投稿に成功しました"
       redirect_back(fallback_location: root_path)
     else
-      flash[:notice] = "レビューの投稿に失敗しました"
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: root_path, flash: { errors: @review.errors.full_messages })
     end
   end
 

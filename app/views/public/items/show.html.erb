@@ -45,7 +45,13 @@
         <% if public_member_signed_in? %>
           <%= form_with model:[@item, @review], url: public_reviews_path, local: true do |f| %>
             <%= f.hidden_field :item_id, value: @item.id %>
-            <%= render 'layouts/error_messages', model: f.object %>
+            <% if flash[:errors].present? %>
+              <ul class="errors">
+                <% flash[:errors].each do |e| %>
+                  <li><%= e %></li>
+                <% end %>
+              </ul>
+            <% end %>
             <div class="form-group">
               <%= f.label "タイトル(20字以内)" %></br>
               <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "col-md-12" %>
