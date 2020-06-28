@@ -57,7 +57,7 @@
       <tbody>
         <% @order.order_details.each do |order_detail| %>
           <tr>
-            <td><%= attachment_image_tag order_detail.item, :item_image, size: "60x60", fallback: "/assets/noimage.jpg" %></td></td>
+            <td><%= attachment_image_tag order_detail.item, :item_image, size: "60x60", fallback: "noimage.jpg" %></td></td>
             <td>
               <%= order_detail.item.name %></br>
               <%= order_detail.item.price.to_s(:delimited) %>円</td>

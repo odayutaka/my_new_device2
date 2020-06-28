@@ -7,7 +7,7 @@
       <h5 class="card-header text-center">ユーザー画像</h5>
       <div class="card-body">
         <div class="form-group text-center">
-          <%= attachment_image_tag @member, :member_image, id: :img_prev, format:'jpg', size: "250x250", fallback: "/assets/noimage.jpg" %>
+          <%= attachment_image_tag @member, :member_image, id: :img_prev, format:'jpg', size: "250x250", fallback: "noimage.jpg" %>
           <%= f.attachment_field :member_image, id: :member_img, class: "mt-4 ml-5" %>
           <script type="text/javascript">
             $(function() {

@@ -12,7 +12,7 @@
 
 <div class="row mt-5">
   <div class="col-md-4">
-    <%= attachment_image_tag @item, :item_image, format:'jpg', size: "300x300", fallback: "/assets/noimage.jpg" %>
+    <%= attachment_image_tag @item, :item_image, format:'jpg', size: "300x300", fallback: "noimage.jpg" %>
   </div>
   <div class="col-md-8">
     <h4 class="item_title"><%= @item.name %></h4>

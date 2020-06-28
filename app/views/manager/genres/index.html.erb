@@ -34,7 +34,7 @@
       <tbody>
         <% @genres.each do |genre| %>
         <tr>
-          <td><%= attachment_image_tag genre, :genre_image,format:'jpg', size: "70x70", fallback: "/assets/noimage.jpg"%></td>
+          <td><%= attachment_image_tag genre, :genre_image,format:'jpg', size: "70x70", fallback: "noimage.jpg"%></td>
           <td><%= genre.name %></td>
           <td><%= link_to "編集する", edit_manager_genre_path(genre.id), class: "btn btn-primary" %></td>
         </tr>

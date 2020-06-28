@@ -50,7 +50,7 @@
       <tbody>
         <% @order.order_details.each do |order_detail| %>
           <tr>
-            <td><%= attachment_image_tag order_detail.item, :item_image, size: "60x60", fallback: "/assets/noimage.jpg" %></td></td>
+            <td><%= attachment_image_tag order_detail.item, :item_image, size: "60x60", fallback: "noimage.jpg" %></td></td>
             <td>
               <%= link_to public_item_path(id: order_detail.item_id) do %>
               <%= order_detail.item.name %></br>
