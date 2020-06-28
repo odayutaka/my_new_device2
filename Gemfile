@@ -71,8 +71,6 @@ gem 'kaminari'
 gem 'rails-i18n'
 # 検索機能用gem
 gem 'ransack'
-# グラフ機能用gem
-gem 'chartkick'
 # アプリ名変更用gem
 gem 'rename'
 # 決済機能用gem
