@@ -78,9 +78,9 @@ gem 'payjp'
 # devise日本語化用gem
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-
+# 変数を利用する為のgem
 gem 'gon'
-
+# デプロイ用gem
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
