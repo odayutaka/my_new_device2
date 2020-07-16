@@ -8,24 +8,8 @@
       <div class="card-body">
         <div class="form-group text-center">
           <%= attachment_image_tag @member, :member_image, id: :img_prev, format:'jpg', size: "250x250", fallback: "noimage.jpg" %>
-          <%= f.attachment_field :member_image, id: :member_img, class: "mt-4 ml-5" %>
-          <script type="text/javascript">
-            $(function() {
-              function readURL(input) {
-                  if (input.files && input.files[0]) {
-                  var reader = new FileReader();
-                  reader.onload = function (e) {
-              $('#img_prev').attr('src', e.target.result);
-                  }
-                  reader.readAsDataURL(input.files[0]);
-                  }
-              }
-              $("#member_img").change(function(){
-                  readURL(this);
-              });
-            });
-          </script>
-          <!-- 12~27, Javascriptでプレビュー機能を実装するための記述 -->
+          <%= f.attachment_field :member_image, id: :category_img, class: "mt-4 ml-5" %>
+          <%= render 'layouts/img_prev' %>
         </div>
       </div>
     </div>
