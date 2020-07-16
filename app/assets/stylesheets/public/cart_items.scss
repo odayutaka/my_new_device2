@@ -1,3 +1,20 @@
 // Place all the styles related to the public/CartItems controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.cart_inside{
+  width: 100%;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 15px;
+  text-align: left;
+  background: #FFA500;
+}
+
+.cart_center{
+  margin-top:  35px;
+}
+
+.cart_right{
+  margin-top:  35px;
+}
