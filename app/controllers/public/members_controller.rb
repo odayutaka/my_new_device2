@@ -30,6 +30,12 @@ class Public::MembersController < ApplicationController
     redirect_to root_path, notice: "退会しました"
   end
 
+  def create
+    @member = current_public_member
+    @member.save
+    MemberMailer.welcome_email(@member).deliver
+  end
+
   private
   def member_params
     params.require(:member).permit(:nick_name,:name,:kana_name,:email,:status,:member_image)
