@@ -74,6 +74,7 @@
           <%= flash_message(flash[:notice], :info) if flash[:notice] %>
         </div>
         <%= yield %>
+         <p id="back-to-top" class="back"><a href="#"><%= image_tag "arrow.png", width: 50, height: 50 %></a></p>
       </div>
       <!-- フッターの記述 -->
     <footer>
