@@ -2,6 +2,7 @@
 
 <div class="row">
   <div class="col-md-12">
+    <% if @orders.exists? %>
     <table class="table table-bordered">
       <thead class="bg-light">
         <tr>
@@ -44,5 +45,11 @@
       </tbody>
     </table>
     <%= paginate @orders %>
+    <% else %>
+      <h5 class="col-md-12 text-center bg-light py-4">注文はありません</h5>
+      <div class="col-md-6 offset-md-3">
+        <%= link_to "マイページに戻る", public_member_path(current_public_member.id), class: "btn btn-info col-md-12 mt-2" %>
+      </div>
+    <% end %>
   </div>
-</div><!-- /.row -->
+</div>
